@@ -7,7 +7,6 @@ import com.demkom58.nmlab6.regression.ExponentialRegression;
 import com.demkom58.nmlab6.regression.LsLinearRegression;
 import com.demkom58.nmlab6.regression.LsQuadraticRegression;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;

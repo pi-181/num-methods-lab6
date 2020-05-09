@@ -1,7 +1,7 @@
 package com.demkom58.nmlab6.regression;
 
 import com.demkom58.divine.math.PointD;
-import org.apache.commons.math3.util.Pair;
+import com.demkom58.divine.util.Pair;
 
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.ToDoubleFunction;

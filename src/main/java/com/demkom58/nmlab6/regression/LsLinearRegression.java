@@ -1,8 +1,6 @@
 package com.demkom58.nmlab6.regression;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 
 public class LsLinearRegression implements Regression {
@@ -12,7 +10,7 @@ public class LsLinearRegression implements Regression {
         validate(searched, start, end, n);
 
         var points = arrayPoints(start, end, n, function);
-        var xs = points.getFirst();
+        var xs = points.getKey();
         var ys = points.getValue();
 
         var length = points.getKey().length;

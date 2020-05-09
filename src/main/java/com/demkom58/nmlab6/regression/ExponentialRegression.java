@@ -9,7 +9,7 @@ public class ExponentialRegression implements Regression {
         validate(searched, start, end, n);
 
         var points = arrayPoints(start, end, n, function);
-        var xs = points.getFirst();
+        var xs = points.getKey();
         var ys = points.getValue();
 
         int length = xs.length;

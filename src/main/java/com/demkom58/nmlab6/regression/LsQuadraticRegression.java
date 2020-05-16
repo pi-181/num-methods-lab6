@@ -43,7 +43,9 @@ public class LsQuadraticRegression implements Regression {
         double a = yAvg - b * xAvg - c * x2Avg;
 
         DoubleUnaryOperator y = (double x) -> a + b * x + c * x * x;
-        return "Результат: " + y.applyAsDouble(searched);
+        final double calculated = y.applyAsDouble(searched);
+        return "Результат: " + calculated + "\n" +
+                "Похибка: " + (function.applyAsDouble(searched) - calculated);
     }
 
 }

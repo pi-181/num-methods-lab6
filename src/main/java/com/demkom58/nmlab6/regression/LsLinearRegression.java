@@ -35,7 +35,9 @@ public class LsLinearRegression implements Regression {
         var intercept = yMid - slope * xMid;
 
         DoubleUnaryOperator y = (double x) -> slope * x + intercept;
-        return "Результат: " + y.applyAsDouble(searched);
+        final double calculated = y.applyAsDouble(searched);
+        return "Результат: " + y.applyAsDouble(searched) + "\n" +
+                "Похибка: " + (function.applyAsDouble(searched) - calculated);
     }
 
 }

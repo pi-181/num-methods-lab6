@@ -26,6 +26,8 @@ public class ExponentialRegression implements Regression {
         double a = Math.pow(Math.E, (sumY - (b * sumX)) / length);
 
         DoubleUnaryOperator y = (double x) -> a * (Math.pow(Math.E, b * x));
-        return "Результат: " + y.applyAsDouble(searched);
+        final double calculated = y.applyAsDouble(searched);
+        return "Результат: " + y.applyAsDouble(searched) + "\n" +
+                "Похибка: " + (function.applyAsDouble(searched) - calculated);
     }
 }

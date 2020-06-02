@@ -9,7 +9,7 @@ import java.util.function.ToDoubleFunction;
 
 public interface Regression {
 
-    String calculate(double x, MatrixTable table, int n) throws Exception;
+    Result calculate(double x, MatrixTable table, int n) throws Exception;
 
     default PointD[] findClosest(PointD[] points, ToDoubleFunction<PointD> extractor, double value) throws Exception {
         PointD lower = null;

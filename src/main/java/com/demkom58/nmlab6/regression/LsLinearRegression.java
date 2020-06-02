@@ -8,7 +8,7 @@ import java.util.function.DoubleUnaryOperator;
 public class LsLinearRegression implements Regression {
 
     @Override
-    public String calculate(double searched, MatrixTable table, int n) throws Exception {
+    public Result calculate(double searched, MatrixTable table, int n) throws Exception {
         var values = table.getHeight();
         var xys = table.toSortedByFirst2DVec();
         var xs = new double[values];
@@ -37,9 +37,7 @@ public class LsLinearRegression implements Regression {
         double determination = Math.pow(correlation, 2);
 
         DoubleUnaryOperator y = find(xs, ys);
-        return "Результат: " + y.applyAsDouble(searched) + "\n" +
-                "Індекс корреляції: " + correlation + "\n" +
-                "Індекс детермінації: " + determination;
+        return new Result(y.applyAsDouble(searched), correlation, determination, y);
     }
 
     private DoubleUnaryOperator find(double[] xs, double[] ys) {

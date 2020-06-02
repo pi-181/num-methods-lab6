@@ -3,12 +3,14 @@ package com.demkom58.nmlab6;
 import com.demkom58.divine.chart.ExtendedLineChart;
 import com.demkom58.divine.gui.GuiController;
 import com.demkom58.divine.util.AlertUtil;
+import com.demkom58.divine.util.DoublePair;
 import com.demkom58.divine.util.Pair;
 import com.demkom58.lab.visual.CellUpdateCallback;
 import com.demkom58.lab.visual.MatrixTable;
 import com.demkom58.nmlab6.regression.ExponentialRegression;
 import com.demkom58.nmlab6.regression.LsLinearRegression;
 import com.demkom58.nmlab6.regression.LsQuadraticRegression;
+import com.demkom58.nmlab6.regression.Result;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,6 +24,8 @@ import javafx.scene.shape.Rectangle;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.mariuszgromada.math.mxparser.Function;
 
+import java.util.function.DoubleUnaryOperator;
+
 public class MainController extends GuiController {
     @FXML private GridPane matrixGrid;
     @FXML private TextField stepsInput;
@@ -33,6 +37,8 @@ public class MainController extends GuiController {
 
     private XYChart.Series<Double, Double> functionSeries =
             new XYChart.Series<>("Функція", FXCollections.observableArrayList());
+    private XYChart.Series<Double, Double> calculatedSeries =
+            new XYChart.Series<>("Результат", FXCollections.observableArrayList());
 
     private MatrixTable matrixTable;
 
@@ -64,7 +70,8 @@ public class MainController extends GuiController {
         try {
             check();
             var result = new LsLinearRegression().calculate(x, matrixTable, steps);
-            showResult("Linear", result);
+            drawCalculated(result);
+            showResult("Linear", result.toString());
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
             e.printStackTrace();
@@ -76,7 +83,8 @@ public class MainController extends GuiController {
         try {
             check();
             var result = new LsQuadraticRegression().calculate(x, matrixTable, steps);
-            showResult("Quadratic", result);
+            drawCalculated(result);
+            showResult("Quadratic", result.toString());
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
             e.printStackTrace();
@@ -88,7 +96,8 @@ public class MainController extends GuiController {
         try {
             check();
             var result = new ExponentialRegression().calculate(x, matrixTable, steps);
-            showResult("Exp", result);
+            drawCalculated(result);
+            showResult("Exp", result.toString());
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
             e.printStackTrace();
@@ -112,9 +121,11 @@ public class MainController extends GuiController {
     private void fillFunctionSeries() {
         lineChart.getData().clear();
         lineChart.getData().add(functionSeries);
+        lineChart.getData().add(calculatedSeries);
         lineChart.removeHorizontalValueMarkers();
         lineChart.removeVerticalValueMarkers();
         functionSeries.setData(FXCollections.observableArrayList());
+        calculatedSeries.setData(FXCollections.observableArrayList());
 
         var height = matrixTable.getHeight();
 
@@ -124,6 +135,19 @@ public class MainController extends GuiController {
             var point = xys[i];
             final XYChart.Data<Double, Double> data = new XYChart.Data<>(point.getD1(), point.getD2());
             functionSeries.getData().add(data);
+        }
+    }
+
+    public void drawCalculated(Result result) {
+        calculatedSeries.setData(FXCollections.observableArrayList());
+        DoubleUnaryOperator function = result.getFunction();
+
+        DoublePair[] pairs = matrixTable.toSortedByFirst2DVec();
+        for (int i = 0; i < pairs.length; i++) {
+            var point = pairs[i];
+            final XYChart.Data<Double, Double> data
+                    = new XYChart.Data<>(point.getD1(), function.applyAsDouble(point.getD1()));
+            calculatedSeries.getData().add(data);
         }
     }
 

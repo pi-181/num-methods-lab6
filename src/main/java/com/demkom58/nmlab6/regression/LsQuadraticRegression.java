@@ -9,7 +9,7 @@ import java.util.function.DoubleUnaryOperator;
 public class LsQuadraticRegression implements Regression {
 
     @Override
-    public String calculate(double searched, MatrixTable table, int n) throws Exception {
+    public Result calculate(double searched, MatrixTable table, int n) throws Exception {
         var xys = table.toSortedByFirst2DVec();
         DoubleUnaryOperator y = find(xys, n);
         final double calculated = y.applyAsDouble(searched);
@@ -29,11 +29,8 @@ public class LsQuadraticRegression implements Regression {
         }
 
         double determination = Math.pow(correlation, 2);
-        return "Результат: " + calculated + "\n" +
-                "Індекс корреляції: " + correlation + "\n" +
-                "Індекс детермінації: " + determination;
+        return new Result(calculated, correlation, determination, y);
     }
-
 
     private DoubleUnaryOperator find(DoublePair[] xys, int values) {
         var xs = new double[values];

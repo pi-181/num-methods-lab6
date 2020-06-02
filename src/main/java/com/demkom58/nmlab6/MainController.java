@@ -3,31 +3,30 @@ package com.demkom58.nmlab6;
 import com.demkom58.divine.chart.ExtendedLineChart;
 import com.demkom58.divine.gui.GuiController;
 import com.demkom58.divine.util.AlertUtil;
+import com.demkom58.divine.util.Pair;
+import com.demkom58.lab.visual.CellUpdateCallback;
+import com.demkom58.lab.visual.MatrixTable;
 import com.demkom58.nmlab6.regression.ExponentialRegression;
 import com.demkom58.nmlab6.regression.LsLinearRegression;
 import com.demkom58.nmlab6.regression.LsQuadraticRegression;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 import org.mariuszgromada.math.mxparser.Expression;
 import org.mariuszgromada.math.mxparser.Function;
 
 public class MainController extends GuiController {
-    @FXML private TextField functionInput;
-    @FXML private TextField fromAInput;
-    @FXML private TextField toBInput;
+    @FXML private GridPane matrixGrid;
     @FXML private TextField stepsInput;
     @FXML private TextField xInput;
     @FXML private ExtendedLineChart<Double, Double> lineChart;
-
-    private Function function;
-
-    private double start;
-    private double end;
 
     private int steps;
     private double x;
@@ -35,18 +34,36 @@ public class MainController extends GuiController {
     private XYChart.Series<Double, Double> functionSeries =
             new XYChart.Series<>("Функція", FXCollections.observableArrayList());
 
+    private MatrixTable matrixTable;
+
     @Override
     public void init() {
         super.init();
+
+        this.matrixTable = new MatrixTable(
+                (event, x, y) -> Platform.runLater(this::fillFunctionSeries),
+                matrixGrid,
+                30,
+                true,
+                "0",
+                null
+        );
+
+        this.matrixTable.init(getSteps(), 2);
         lineChart.getData().add(functionSeries);
         read();
+    }
+
+    @FXML
+    public void onUpdate(ActionEvent event) {
+        matrixTable.setMatrix(new double[getSteps()][2]);
     }
 
     @FXML
     public void linear(MouseEvent event) {
         try {
             check();
-            var result = new LsLinearRegression().calculate(x, start, end, steps, function::calculate);
+            var result = new LsLinearRegression().calculate(x, matrixTable, steps);
             showResult("Linear", result);
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
@@ -58,7 +75,7 @@ public class MainController extends GuiController {
     public void quadratic(MouseEvent event) {
         try {
             check();
-            var result = new LsQuadraticRegression().calculate(x, start, end, steps, function::calculate);
+            var result = new LsQuadraticRegression().calculate(x, matrixTable, steps);
             showResult("Quadratic", result);
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
@@ -70,7 +87,7 @@ public class MainController extends GuiController {
     public void lagrange(MouseEvent event) {
         try {
             check();
-            var result = new ExponentialRegression().calculate(x, start, end, steps, function::calculate);
+            var result = new ExponentialRegression().calculate(x, matrixTable, steps);
             showResult("Exp", result);
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
@@ -89,69 +106,38 @@ public class MainController extends GuiController {
     }
 
     private void check() throws IllegalStateException {
-        if (!function.checkSyntax())
-            throw new IllegalStateException("Перевірте введену функцію.\n" + function.getErrorMessage());
+
     }
 
-    private void fillFunctionSeries(Double intervalA, Double intervalB) {
+    private void fillFunctionSeries() {
+        lineChart.getData().clear();
         lineChart.getData().add(functionSeries);
         lineChart.removeHorizontalValueMarkers();
         lineChart.removeVerticalValueMarkers();
         functionSeries.setData(FXCollections.observableArrayList());
 
-        double y, x;
-        x = intervalA - 5.0;
+        var height = matrixTable.getHeight();
 
-        final double end = 2 * (intervalB * 10 - intervalA * 10) + 50;
-        for (int i = 0; i < end; i++) {
-            x = x + 0.1;
-            y = function.calculate(x);
-            final XYChart.Data<Double, Double> data = new XYChart.Data<>(x, y);
+        var xys = matrixTable.toSortedByFirst2DVec();
 
-            if (i != 0 && i != end - 1) {
-                final Rectangle rectangle = new Rectangle(0, 0);
-                rectangle.setVisible(false);
-                data.setNode(rectangle);
-            }
-
+        for (int i = 0; i < height; i++) {
+            var point = xys[i];
+            final XYChart.Data<Double, Double> data = new XYChart.Data<>(point.getD1(), point.getD2());
             functionSeries.getData().add(data);
         }
-
-
-        final XYChart.Series<Double, Double> intervalSeries =
-                new XYChart.Series<>("Проміжок", FXCollections.observableArrayList());
-
-        intervalSeries.getData().addAll(
-                new XYChart.Data<>(intervalA, 0d),
-                new XYChart.Data<>(intervalB, 0d)
-        );
-
-        lineChart.getData().add(intervalSeries);
     }
 
     private void read() {
-        final var prefix = "f(x)=";
-
         if (!lineChart.getData().isEmpty())
             lineChart.setData(FXCollections.observableArrayList());
 
-        String functionText = functionInput.getText().replace(" ", "");
-        if (functionText.isBlank()) {
-            final String promptText = functionInput.getPromptText().replace(" ", "");
-            functionText = promptText.substring(promptText.indexOf(prefix));
-        }
-
-        if (!functionText.isEmpty() && !functionText.startsWith(prefix))
-            return;
-        function = new Function(functionText);
-
-        start = getA();
-        end = getB();
         steps = getSteps();
-        x = getX();
-
-        if (function.checkSyntax())
-            fillFunctionSeries(start, end);
+        try {
+            x = Double.parseDouble(xInput.getText());
+        } catch (Exception e) {
+            x = Double.parseDouble(xInput.getPromptText());
+        }
+        fillFunctionSeries();
     }
 
     public int getSteps() {
@@ -166,39 +152,4 @@ public class MainController extends GuiController {
         return (int) expression.calculate();
     }
 
-    public double getX() {
-        String text = xInput.getText();
-        if (text.isBlank())
-            return Double.parseDouble(xInput.getPromptText());
-
-        var expression = new Expression(text);
-        if (!expression.checkSyntax())
-            return Double.MIN_VALUE;
-
-        return expression.calculate();
-    }
-
-    public double getA() {
-        String text = fromAInput.getText();
-        if (text.isBlank())
-            return Double.parseDouble(fromAInput.getPromptText());
-
-        var expression = new Expression(text);
-        if (!expression.checkSyntax())
-            return Double.MIN_VALUE;
-
-        return expression.calculate();
-    }
-
-    public double getB() {
-        String text = toBInput.getText();
-        if (text.isBlank())
-            return Double.parseDouble(toBInput.getPromptText());
-
-        var expression = new Expression(text);
-        if (!expression.checkSyntax())
-            return Double.MIN_VALUE;
-
-        return expression.calculate();
-    }
 }

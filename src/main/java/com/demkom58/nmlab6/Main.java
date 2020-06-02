@@ -19,7 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         GuiManager guiManager = new GuiManager(primaryStage);
 
-        primaryStage.setTitle("Чисельні методи: Лабараторна робота №6");
+        primaryStage.setTitle("Чисельні методи: Лабараторна робота №6 Обробка експериментальних даних.");
         primaryStage.setResizable(false);
 
         guiManager.registerGui(MainController.class, getClass().getResource("/style/main.fxml"), primaryStage);

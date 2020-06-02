@@ -1,16 +1,22 @@
 package com.demkom58.nmlab6.regression;
 
+import com.demkom58.lab.visual.MatrixTable;
+
 import java.util.Arrays;
 import java.util.function.DoubleUnaryOperator;
 
 public class ExponentialRegression implements Regression {
     @Override
-    public String calculate(double searched, double start, double end, int n, DoubleUnaryOperator function) throws Exception {
-        validate(searched, start, end, n);
+    public String calculate(double searched, MatrixTable table, int n) throws Exception {
+        var values = table.getHeight();
+        var xys = table.toSortedByFirst2DVec();
+        var xs = new double[values];
+        var ys = new double[values];
 
-        var points = arrayPoints(start, end, n, function);
-        var xs = points.getKey();
-        var ys = points.getValue();
+        for (int i = 0; i < values; i++) {
+             xs[i] = xys[i].getD1();
+             ys[i] = xys[i].getD2();
+        }
 
         int length = xs.length;
 
@@ -26,8 +32,6 @@ public class ExponentialRegression implements Regression {
         double a = Math.pow(Math.E, (sumY - (b * sumX)) / length);
 
         DoubleUnaryOperator y = (double x) -> a * (Math.pow(Math.E, b * x));
-        final double calculated = y.applyAsDouble(searched);
-        return "Результат: " + y.applyAsDouble(searched) + "\n" +
-                "Похибка: " + (function.applyAsDouble(searched) - calculated);
+        return "Результат: " + y.applyAsDouble(searched);
     }
 }

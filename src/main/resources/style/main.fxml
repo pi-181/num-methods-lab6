@@ -6,26 +6,23 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.demkom58.nmlab6.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.demkom58.nmlab6.MainController">
    <children>
-      <Button layoutX="4.0" layoutY="26.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#linear" prefHeight="26.0" prefWidth="290.0" text="Linear" />
-      <Button layoutX="4.0" layoutY="58.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#quadratic" prefHeight="26.0" prefWidth="290.0" text="Quadratic" />
-      <Button layoutX="4.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#lagrange" prefHeight="26.0" prefWidth="290.0" text="Exp" />
-      <TextField fx:id="functionInput" layoutX="368.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="242.0" promptText="Приклад: f(x) = x^2 - 9" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="Функція" />
-      <Separator layoutX="298.0" layoutY="-1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="135.0" prefWidth="5.0" />
-      <TextField fx:id="fromAInput" layoutX="368.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="0" />
-      <TextField fx:id="toBInput" layoutX="517.0" layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="5" />
-      <Separator layoutX="301.0" layoutY="50.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="319.0" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="308.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="Від a =" />
-      <Separator layoutX="302.0" layoutY="90.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="319.0" />
-      <TextField fx:id="stepsInput" layoutX="368.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="20" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="65.0" text="n =" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="460.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="до b =" />
+      <Button layoutX="4.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#linear" prefHeight="26.0" prefWidth="290.0" text="Linear" />
+      <Button layoutX="4.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#quadratic" prefHeight="26.0" prefWidth="290.0" text="Quadratic" />
+      <Button layoutX="4.0" layoutY="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#lagrange" prefHeight="26.0" prefWidth="290.0" text="Exp" />
+      <Separator layoutX="298.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="98.0" prefWidth="4.0" />
+      <Separator layoutX="302.0" layoutY="104.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="319.0" />
+      <TextField fx:id="stepsInput" layoutX="368.0" layoutY="109.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="5" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="109.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="65.0" text="n =" />
       <Separator layoutX="1.0" layoutY="134.0" prefHeight="6.0" prefWidth="620.0" />
 <!--      <LineChart fx:id="lineChart" layoutY="139.0" prefHeight="395.0" prefWidth="613.0" title="Графік">-->
       <ExtendedLineChart fx:id="lineChart" layoutY="139.0" prefHeight="395.0" prefWidth="613.0" title="Графік">
@@ -37,7 +34,21 @@
         </yAxis>
       </ExtendedLineChart>
 <!--      </LineChart>-->
-      <TextField layoutX="519.0" layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="0.1" fx:id="xInput" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="462.0" layoutY="101.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="x =" />
+      <TextField layoutX="519.0" layoutY="109.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="4" fx:id="xInput" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="462.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="x =" />
+      <Separator layoutX="1.0" layoutY="36.0" prefHeight="6.0" prefWidth="620.0" />
+      <Text layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дотаток створили студенти групи ПІ-181 Демиденко М.Б. та Луговський В.Б." textAlignment="CENTER" wrappingWidth="620.0" />
+       <ScrollPane layoutX="620.0" layoutY="1.0" prefHeight="538.0" prefWidth="92.0">
+           <content>
+               <GridPane fx:id="matrixGrid" gridLinesVisible="true" layoutX="3.0" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity">
+                   <rowConstraints>
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                   </rowConstraints>
+               </GridPane>
+           </content>
+       </ScrollPane>
+      <Button layoutX="303.0" layoutY="43.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="60.0" prefWidth="310.0" text="Оновити" />
    </children>
 </AnchorPane>

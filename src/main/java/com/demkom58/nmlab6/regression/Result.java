@@ -18,7 +18,7 @@ public class Result implements Comparable<Result> {
         this.name = name;
         this.result = result;
         this.correlation = correlation;
-        double absCorr = Math.abs(correlation);
+        double absCorr = Math.abs(correlation) ;
         if (absCorr <= 0.3)
             character = "практично відсутній";
         else if (absCorr > 0.3 && absCorr <= 0.5)

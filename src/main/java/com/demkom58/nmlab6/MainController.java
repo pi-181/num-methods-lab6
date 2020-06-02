@@ -92,7 +92,7 @@ public class MainController extends GuiController {
     }
 
     @FXML
-    public void lagrange(MouseEvent event) {
+    public void exponential(MouseEvent event) {
         try {
             check();
             var result = new ExponentialRegression().calculate(x, matrixTable, steps);

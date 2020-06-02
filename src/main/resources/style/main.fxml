@@ -18,7 +18,7 @@
    <children>
       <Button layoutX="4.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#linear" prefHeight="26.0" prefWidth="290.0" text="Linear" />
       <Button layoutX="4.0" layoutY="75.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#quadratic" prefHeight="26.0" prefWidth="290.0" text="Quadratic" />
-      <Button layoutX="4.0" layoutY="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#lagrange" prefHeight="26.0" prefWidth="290.0" text="Exp" />
+      <Button layoutX="4.0" layoutY="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#exponential" prefHeight="26.0" prefWidth="290.0" text="Exp" />
       <Separator layoutX="298.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="98.0" prefWidth="4.0" />
       <Separator layoutX="302.0" layoutY="104.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="319.0" />
       <TextField fx:id="stepsInput" layoutX="368.0" layoutY="109.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="5" />

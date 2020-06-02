@@ -37,7 +37,7 @@
       <TextField layoutX="519.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="4" fx:id="xInput" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="462.0" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="x =" />
       <Separator layoutX="1.0" layoutY="36.0" prefHeight="6.0" prefWidth="620.0" />
-      <Text layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дотаток створили студенти групи ПІ-181 Демиденко М.Б. та Луговський В.Б." textAlignment="CENTER" wrappingWidth="620.0" />
+      <Text layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Додаток створили студенти групи ПІ-181 Демиденко М.Б. та Луговський В.Б." textAlignment="CENTER" wrappingWidth="620.0" />
        <ScrollPane layoutX="620.0" layoutY="37.0" prefHeight="488.0" prefWidth="86.0">
            <content>
                <GridPane fx:id="matrixGrid" gridLinesVisible="true" layoutX="3.0" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity">

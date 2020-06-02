@@ -28,7 +28,7 @@ public class ExponentialRegression implements Regression {
         }
 
         double determination = Math.pow(correlation, 2);
-        return new Result("Експоненціальний", calculated, correlation, determination, y);
+        return new Result("Експоненціальний", searched, calculated, correlation, determination, y);
     }
 
     private DoubleUnaryOperator find(DoublePair[] xys, int values) {

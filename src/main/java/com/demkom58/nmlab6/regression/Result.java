@@ -1,6 +1,5 @@
 package com.demkom58.nmlab6.regression;
 
-import com.demkom58.nmlab6.MainController;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -8,14 +7,16 @@ import java.util.function.DoubleUnaryOperator;
 
 public class Result implements Comparable<Result> {
     private final String name;
+    private final double x;
     private final double result;
     private final double correlation;
     private final String character;
     private final double determination;
     private final DoubleUnaryOperator function;
 
-    public Result(String name, double result, double correlation, double determination, DoubleUnaryOperator function) {
+    public Result(String name, double x, double result, double correlation, double determination, DoubleUnaryOperator function) {
         this.name = name;
+        this.x = x;
         this.result = result;
         this.correlation = correlation;
         double absCorr = Math.abs(correlation) ;
@@ -84,7 +85,7 @@ public class Result implements Comparable<Result> {
 
     @Override
     public String toString() {
-                return "Результат:" + result + "\n" +
+                return "Результат: y = " + result + " при x = " + x + "\n" +
                 "Індекс корреляції: " + correlation + " (" + character + " звязок x i y)" + "\n" +
                 "Індекс детермінації: " + determination;
     }

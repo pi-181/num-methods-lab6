@@ -37,7 +37,7 @@ public class LsLinearRegression implements Regression {
         double determination = Math.pow(correlation, 2);
 
         DoubleUnaryOperator y = find(xs, ys);
-        return new Result("Лінійний", y.applyAsDouble(searched), correlation, determination, y);
+        return new Result("Лінійний", searched, y.applyAsDouble(searched), correlation, determination, y);
     }
 
     private DoubleUnaryOperator find(double[] xs, double[] ys) {

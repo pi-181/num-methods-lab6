@@ -37,7 +37,7 @@
       <TextField layoutX="519.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="4" fx:id="xInput" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="462.0" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="x =" />
       <Separator layoutX="1.0" layoutY="36.0" prefHeight="6.0" prefWidth="620.0" />
-      <Text layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дотаток створили студенти групи ПІ-181 Демиденко М.Б. та Луговський В.Б." textAlignment="CENTER" wrappingWidth="620.0" />
+      <Text layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Додаток створили студенти групи ПІ-181 Демиденко М.Б. та Луговський В.Б." textAlignment="CENTER" wrappingWidth="620.0" />
        <ScrollPane layoutX="620.0" layoutY="37.0" prefHeight="488.0" prefWidth="86.0">
            <content>
                <GridPane fx:id="matrixGrid" gridLinesVisible="true" layoutX="3.0" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity">
@@ -49,8 +49,8 @@
                </GridPane>
            </content>
        </ScrollPane>
-      <Button layoutX="303.0" layoutY="43.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="60.0" prefWidth="310.0" text="Оновити" />
-      <Button layoutX="4.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#automatic" prefHeight="26.0" prefWidth="290.0" text="Automatic" />
+      <Button layoutX="303.0" layoutY="43.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="60.0" prefWidth="310.0" text="Побудувати" />
+      <Button layoutX="4.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#automatic" prefHeight="26.0" prefWidth="290.0" text="Оптимальний" />
       <Separator layoutX="617.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="530.0" prefWidth="4.0" />
       <Text layoutX="635.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
       <Text layoutX="679.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y" />

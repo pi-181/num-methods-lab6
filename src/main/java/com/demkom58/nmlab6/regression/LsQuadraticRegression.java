@@ -11,17 +11,18 @@ public class LsQuadraticRegression implements Regression {
     @Override
     public String calculate(double searched, MatrixTable table, int n) throws Exception {
         var xys = table.toSortedByFirst2DVec();
-        DoubleUnaryOperator y = find(searched, xys, n);
+        DoubleUnaryOperator y = find(xys, n);
         final double calculated = y.applyAsDouble(searched);
 
-        double correlation = 0;
+        var yAvg = Arrays.stream(xys).mapToDouble(DoublePair::getD2).average().orElseThrow();
+        double correlation;
         {
             var sqSum = Arrays.stream(xys)
                     .mapToDouble(v -> Math.pow(v.getD2() - y.applyAsDouble(v.getD1()), 2))
                     .sum();
 
             var sqCalcSum = Arrays.stream(xys)
-                    .mapToDouble(v -> Math.pow(v.getD2() - calculated, 2))
+                    .mapToDouble(v -> Math.pow(v.getD2() - yAvg, 2))
                     .sum();
 
             correlation = Math.sqrt(1 - (sqSum / sqCalcSum));
@@ -34,7 +35,7 @@ public class LsQuadraticRegression implements Regression {
     }
 
 
-    private DoubleUnaryOperator find(double searched, DoublePair[] xys, int values) {
+    private DoubleUnaryOperator find(DoublePair[] xys, int values) {
         var xs = new double[values];
         var ys = new double[values];
 

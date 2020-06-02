@@ -1,5 +1,6 @@
 package com.demkom58.nmlab6.regression;
 
+import com.demkom58.divine.util.DoublePair;
 import com.demkom58.lab.visual.MatrixTable;
 
 import java.util.Arrays;
@@ -9,8 +10,31 @@ public class LsQuadraticRegression implements Regression {
 
     @Override
     public String calculate(double searched, MatrixTable table, int n) throws Exception {
-        var values = table.getHeight();
         var xys = table.toSortedByFirst2DVec();
+        DoubleUnaryOperator y = find(searched, xys, n);
+        final double calculated = y.applyAsDouble(searched);
+
+        double correlation = 0;
+        {
+            var sqSum = Arrays.stream(xys)
+                    .mapToDouble(v -> Math.pow(v.getD2() - y.applyAsDouble(v.getD1()), 2))
+                    .sum();
+
+            var sqCalcSum = Arrays.stream(xys)
+                    .mapToDouble(v -> Math.pow(v.getD2() - calculated, 2))
+                    .sum();
+
+            correlation = Math.sqrt(1 - (sqSum / sqCalcSum));
+        }
+
+        double determination = Math.pow(correlation, 2);
+        return "Результат: " + calculated + "\n" +
+                "Індекс корреляції: " + correlation + "\n" +
+                "Індекс детермінації: " + determination;
+    }
+
+
+    private DoubleUnaryOperator find(double searched, DoublePair[] xys, int values) {
         var xs = new double[values];
         var ys = new double[values];
 
@@ -48,9 +72,7 @@ public class LsQuadraticRegression implements Regression {
         double c = (sx2y * sxx - sxy * sxx2) / (sxx * sx2x2 - sxx2 * sxx2);
         double a = yAvg - b * xAvg - c * x2Avg;
 
-        DoubleUnaryOperator y = (double x) -> a + b * x + c * x * x;
-        final double calculated = y.applyAsDouble(searched);
-        return "Результат: " + calculated;
+        return (double x) -> a + b * x + c * x * x;
     }
 
 }

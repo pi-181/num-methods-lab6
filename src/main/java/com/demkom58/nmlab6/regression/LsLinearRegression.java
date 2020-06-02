@@ -38,8 +38,27 @@ public class LsLinearRegression implements Regression {
         var slope = xy / xx;
         var intercept = yMid - slope * xMid;
 
+        double correlation = 0;
+        {
+            var mulSum = Arrays.stream(xys).mapToDouble(v -> v.getD1() * v.getD2()).sum();
+            var xSum = Arrays.stream(xs).sum();
+            var ySum = Arrays.stream(ys).sum();
+            var xySumMul = xSum * ySum;
+            var x2Sum = Arrays.stream(xs).map(x -> x * x).sum();
+            var y2Sum = Arrays.stream(ys).map(y -> y * y).sum();
+
+            correlation =
+                    (n * mulSum - xySumMul)
+                    /
+                    Math.sqrt((n * x2Sum - Math.pow(xSum, 2)) * (n * y2Sum - Math.pow(ySum, 2)));
+
+        }
+        double determination = Math.pow(correlation, 2);
+
         DoubleUnaryOperator y = (double x) -> slope * x + intercept;
-        return "Результат: " + y.applyAsDouble(searched);
+        return "Результат: " + y.applyAsDouble(searched) + "\n" +
+                "Індекс корреляції: " + correlation + "\n" +
+                "Індекс детермінації: " + determination;
     }
 
 }

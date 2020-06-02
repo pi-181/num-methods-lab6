@@ -50,7 +50,7 @@
            </content>
        </ScrollPane>
       <Button layoutX="303.0" layoutY="43.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="60.0" prefWidth="310.0" text="Побудувати" />
-      <Button layoutX="4.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#automatic" prefHeight="26.0" prefWidth="290.0" text="Automatic" />
+      <Button layoutX="4.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#automatic" prefHeight="26.0" prefWidth="290.0" text="Оптимальний" />
       <Separator layoutX="617.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="530.0" prefWidth="4.0" />
       <Text layoutX="635.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X" />
       <Text layoutX="679.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Y" />

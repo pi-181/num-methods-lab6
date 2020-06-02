@@ -29,7 +29,7 @@ public class LsQuadraticRegression implements Regression {
         }
 
         double determination = Math.pow(correlation, 2);
-        return new Result("Квадратичний", calculated, correlation, determination, y);
+        return new Result("Квадратичний", calculated, correlation,"", determination, y);
     }
 
     private DoubleUnaryOperator find(DoublePair[] xys, int values) {

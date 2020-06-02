@@ -14,18 +14,18 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="542.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.demkom58.nmlab6.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="716.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.demkom58.nmlab6.MainController">
    <children>
       <Button layoutX="4.0" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#linear" prefHeight="26.0" prefWidth="290.0" text="Лінійний" />
       <Button layoutX="4.0" layoutY="68.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#quadratic" prefHeight="26.0" prefWidth="290.0" text="Квадратичний" />
       <Button layoutX="4.0" layoutY="96.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#exponential" prefHeight="26.0" prefWidth="290.0" text="Експоненціальний" />
-      <Separator layoutX="298.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="115.0" prefWidth="4.0" />
+      <Separator layoutX="298.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="119.0" prefWidth="4.0" />
       <Separator layoutX="302.0" layoutY="104.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="5.0" prefWidth="319.0" />
       <TextField fx:id="stepsInput" layoutX="368.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#onChanged" prefHeight="25.0" prefWidth="92.0" promptText="5" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="302.0" layoutY="118.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="65.0" text="n =" />
-      <Separator layoutX="1.0" layoutY="150.0" prefHeight="6.0" prefWidth="620.0" />
-<!--      <LineChart fx:id="lineChart" layoutY="151.0" prefHeight="383.0" prefWidth="614.0" title="Графік">-->
-      <ExtendedLineChart fx:id="lineChart" layoutY="139.0" prefHeight="395.0" prefWidth="613.0" title="Графік">
+      <Separator layoutX="1.0" layoutY="152.0" prefHeight="6.0" prefWidth="620.0" />
+<!--      <LineChart fx:id="lineChart" layoutX="4.0" layoutY="156.0" prefHeight="374.0" prefWidth="614.0" title="Графік">-->
+      <ExtendedLineChart fx:id="lineChart" layoutX="4.0" layoutY="156.0" prefHeight="374.0" prefWidth="614.0" title="Графік">
         <xAxis>
           <NumberAxis label="x" side="BOTTOM" />
         </xAxis>
@@ -38,7 +38,7 @@
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="462.0" layoutY="119.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" text="x =" />
       <Separator layoutX="1.0" layoutY="36.0" prefHeight="6.0" prefWidth="620.0" />
       <Text layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Дотаток створили студенти групи ПІ-181 Демиденко М.Б. та Луговський В.Б." textAlignment="CENTER" wrappingWidth="620.0" />
-       <ScrollPane layoutX="620.0" layoutY="1.0" prefHeight="538.0" prefWidth="92.0">
+       <ScrollPane layoutX="620.0" layoutY="1.0" prefHeight="524.0" prefWidth="92.0">
            <content>
                <GridPane fx:id="matrixGrid" gridLinesVisible="true" layoutX="3.0" layoutY="1.0" minHeight="-Infinity" minWidth="-Infinity">
                    <rowConstraints>

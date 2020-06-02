@@ -43,7 +43,7 @@ public class MainController extends GuiController {
         this.matrixTable = new MatrixTable(
                 (event, x, y) -> Platform.runLater(this::fillFunctionSeries),
                 matrixGrid,
-                30,
+                40,
                 true,
                 "0",
                 null

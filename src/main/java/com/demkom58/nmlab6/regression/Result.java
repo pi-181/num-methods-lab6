@@ -1,5 +1,6 @@
 package com.demkom58.nmlab6.regression;
 
+import com.demkom58.nmlab6.MainController;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -17,16 +18,16 @@ public class Result implements Comparable<Result> {
         this.name = name;
         this.result = result;
         this.correlation = correlation;
-
-        if (correlation <= 0.3)
+        double absCorr = Math.abs(correlation);
+        if (absCorr <= 0.3)
             character = "практично відсутній";
-        else if (correlation > 0.3 && correlation <= 0.5)
+        else if (absCorr > 0.3 && absCorr <= 0.5)
             character = "слабкий";
-        else if (correlation > 0.5 && correlation <= 0.7)
+        else if (absCorr > 0.5 && absCorr <= 0.7)
             character = "помітний";
-        else if (correlation > 0.7 && correlation <= 0.9)
+        else if (absCorr > 0.7 && absCorr <= 0.9)
             character = "сильний";
-        else if (correlation > 0.9 && correlation <= 1)
+        else if (absCorr > 0.9 && absCorr <= 1)
             character = "дуже сильний";
         else
             character = "?";
@@ -83,7 +84,7 @@ public class Result implements Comparable<Result> {
 
     @Override
     public String toString() {
-        return "Результат: " + result + "\n" +
+                return "Результат:" + result + "\n" +
                 "Індекс корреляції: " + correlation + " (" + character + " звязок x i y)" + "\n" +
                 "Індекс детермінації: " + determination;
     }

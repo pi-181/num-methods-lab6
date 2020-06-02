@@ -71,7 +71,7 @@ public class MainController extends GuiController {
             check();
             var result = new LsLinearRegression().calculate(x, matrixTable, steps);
             drawCalculated(result);
-            showResult("Linear", result.toString());
+            showResult("Метод: " + result.getName(), result.toString());
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class MainController extends GuiController {
             check();
             var result = new LsQuadraticRegression().calculate(x, matrixTable, steps);
             drawCalculated(result);
-            showResult("Quadratic", result.toString());
+            showResult("Метод: " + result.getName(), result.toString());
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
             e.printStackTrace();
@@ -97,7 +97,7 @@ public class MainController extends GuiController {
             check();
             var result = new ExponentialRegression().calculate(x, matrixTable, steps);
             drawCalculated(result);
-            showResult("Exp", result.toString());
+            showResult("Метод: " + result.getName(), result.toString());
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
             e.printStackTrace();
@@ -108,9 +108,20 @@ public class MainController extends GuiController {
     public void automatic(MouseEvent event) {
         try {
             check();
-            var result = new ExponentialRegression().calculate(x, matrixTable, steps);
+            var lnResult = new LsLinearRegression().calculate(x, matrixTable, steps);
+            var qdResult = new LsQuadraticRegression().calculate(x, matrixTable, steps);
+            var expResult = new ExponentialRegression().calculate(x, matrixTable, steps);
+
+            var result = lnResult;
+
+            if (qdResult.getDetermination() > result.getDetermination())
+                result = qdResult;
+
+            if (expResult.getDetermination() > result.getDetermination())
+                result = expResult;
+
             drawCalculated(result);
-            showResult("Найркщий алгоритм: Automatic", result.toString());
+            showResult("Оптимальний метод: " + result.getName(), result.toString());
         } catch (Exception e) {
             AlertUtil.showErrorMessage(e);
             e.printStackTrace();
@@ -123,7 +134,7 @@ public class MainController extends GuiController {
     }
 
     private void showResult(String method, String result) {
-        AlertUtil.showInfoMessage("Method " + method, result);
+        AlertUtil.showInfoMessage(method, result);
         read();
     }
 

@@ -6,16 +6,22 @@ import java.util.Objects;
 import java.util.function.DoubleUnaryOperator;
 
 public class Result implements Comparable<Result> {
+    private final String name;
     private final double result;
     private final double correlation;
     private final double determination;
     private final DoubleUnaryOperator function;
 
-    public Result(double result, double correlation, double determination, DoubleUnaryOperator function) {
+    public Result(String name, double result, double correlation, double determination, DoubleUnaryOperator function) {
+        this.name = name;
         this.result = result;
         this.correlation = correlation;
         this.determination = determination;
         this.function = function;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getResult() {
@@ -46,12 +52,14 @@ public class Result implements Comparable<Result> {
         Result result1 = (Result) o;
         return Double.compare(result1.result, result) == 0 &&
                 Double.compare(result1.correlation, correlation) == 0 &&
-                Double.compare(result1.determination, determination) == 0;
+                Double.compare(result1.determination, determination) == 0 &&
+                Objects.equals(name, result1.name) &&
+                Objects.equals(function, result1.function);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(result, correlation, determination);
+        return Objects.hash(name, result, correlation, determination, function);
     }
 
     @Override

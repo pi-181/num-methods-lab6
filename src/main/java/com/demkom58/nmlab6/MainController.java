@@ -105,6 +105,19 @@ public class MainController extends GuiController {
     }
 
     @FXML
+    public void automatic(MouseEvent event) {
+        try {
+            check();
+            var result = new ExponentialRegression().calculate(x, matrixTable, steps);
+            drawCalculated(result);
+            showResult("Найркщий алгоритм: Automatic", result.toString());
+        } catch (Exception e) {
+            AlertUtil.showErrorMessage(e);
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     public void onChanged(KeyEvent event) {
         read();
     }
